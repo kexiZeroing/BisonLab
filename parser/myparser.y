@@ -64,10 +64,16 @@ Term		: Term '*' Factor
 			| Factor 
 			;
 Factor		: '(' Expr ')' 
+         	| Reference
 	  		| NUMBER 
 	  		| CHARCONST 
 	  		; 
-
+Reference 	: NAME
+          	| NAME '[' Exprs ']'
+			;
+Exprs     	: Expr ',' Exprs 
+          	| Expr
+			;
 
 %%                    
  /* C code */
