@@ -39,17 +39,41 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     END_OF_FILE = 0,
-     NAME = 258,
-     NUMBER = 259,
-     CHARCONST = 260
+     WRITE = 258,
+     AND = 259,
+     OR = 260,
+     NOT = 261,
+     IF = 262,
+     ELSE = 263,
+     THEN = 264,
+     LT = 265,
+     LE = 266,
+     EQ = 267,
+     NE = 268,
+     GT = 269,
+     GE = 270,
+     NAME = 271,
+     NUMBER = 272,
+     CHARCONST = 273
    };
 #endif
 /* Tokens.  */
-#define END_OF_FILE 0
-#define NAME 258
-#define NUMBER 259
-#define CHARCONST 260
+#define WRITE 258
+#define AND 259
+#define OR 260
+#define NOT 261
+#define IF 262
+#define ELSE 263
+#define THEN 264
+#define LT 265
+#define LE 266
+#define EQ 267
+#define NE 268
+#define GT 269
+#define GE 270
+#define NAME 271
+#define NUMBER 272
+#define CHARCONST 273
 
 
 

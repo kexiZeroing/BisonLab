@@ -4,18 +4,19 @@
 
 %%
 "//".*                  ;
-"=="                    { return 'EQ'; }
-">"                     { return 'GT'; }
-">="                    { return 'GE'; }
-"<"                     { return 'LT'; }
-"<="                    { return 'LE'; }
-"!="                    { return 'NE'; }
-"and"                   { return 'AND'; }
-"or"                    { return 'OR'; }
-"not"                   { return 'NOT'; }
-"if"                    { return 'IF'; }
-"then"                  { return 'THEN'; }
-"else"                  { return 'ELSE'; }
+"write"                 { return WRITE; }
+"=="                    { return EQ; }
+">"                     { return GT; }
+">="                    { return GE; }
+"<"                     { return LT; }
+"<="                    { return LE; }
+"!="                    { return NE; }
+"and"                   { return AND; }
+"or"                    { return OR; }
+"not"                   { return NOT; }
+"if"                    { return IF; }
+"then"                  { return THEN; }
+"else"                  { return ELSE; }
 ";"                     { return ';'; }
 "+"                     { return '+'; }
 "-"                     { return '-'; }

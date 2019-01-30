@@ -7,6 +7,7 @@
 %error-verbose
 
 %start Stmts
+%token WRITE
 %token AND
 %token OR
 %token NOT
@@ -32,6 +33,7 @@ Stmts		: Stmts Stmt
 Stmt      	: IF '(' Bool ')' THEN Stmt 
           	| IF '(' Bool ')' THEN WithElse ELSE Stmt 
 			| '{' Stmts '}'   
+			| WRITE Expr ';'
 			;
 WithElse	: IF '(' Bool ')' THEN WithElse ELSE WithElse
 			| '{' Stmts '}'

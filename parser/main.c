@@ -6,7 +6,7 @@ int errorCount = 0;
 // must have yyerror, yywrap
 int yyerror (const char *s) {	
 	errorCount += 1;
-	fprintf(stderr, "Line %d has an error: %s\n", yylineno, s);
+	fprintf(stderr, "\nLine %d has an error: %s\n", yylineno, s);
 }
 
 int yywrap (void) {return 1;}  // means end
