@@ -4,6 +4,7 @@
 
 %%
 "//".*                  ;
+"read"                  { return READ; }
 "write"                 { return WRITE; }
 "=="                    { return EQ; }
 ">"                     { return GT; }
@@ -17,13 +18,20 @@
 "if"                    { return IF; }
 "then"                  { return THEN; }
 "else"                  { return ELSE; }
+"for"                   { return FOR; }
+"to"                    { return TO; }
+"by"                    { return BY; }
+"while"                 { return WHILE; }
 ";"                     { return ';'; }
 "+"                     { return '+'; }
 "-"                     { return '-'; }
 "*"                     { return '*'; }
 "/"                     { return '/'; }
+"="                     { return '='; }
 "("                     { return '('; }
 ")"                     { return ')'; }
+"{"                     { return '{'; }
+"}"                     { return '}'; }
 "["                     { return '['; }
 "]"                     { return ']'; }
 ","                     { return ','; }

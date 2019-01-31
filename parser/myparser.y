@@ -8,12 +8,17 @@
 
 %start Stmts
 %token WRITE
+%token READ
 %token AND
 %token OR
 %token NOT
 %token IF
 %token ELSE
 %token THEN
+%token FOR
+%token TO
+%token BY
+%token WHILE
 %token LT
 %token LE
 %token EQ
@@ -30,9 +35,13 @@
 Stmts		: Stmts Stmt 
 	 		| Stmt 
 	 		;
-Stmt      	: IF '(' Bool ')' THEN Stmt 
+Stmt      	: '{' Stmts '}'  
+			| Reference '=' Expr ';' 
+			| IF '(' Bool ')' THEN Stmt 
           	| IF '(' Bool ')' THEN WithElse ELSE Stmt 
-			| '{' Stmts '}'   
+			| WHILE '(' Bool ')' '{' Stmts '}' 
+			| FOR NAME '=' Expr TO Expr BY Expr '{' Stmts '}' 
+			| READ Reference ';'
 			| WRITE Expr ';'
 			;
 WithElse	: IF '(' Bool ')' THEN WithElse ELSE WithElse

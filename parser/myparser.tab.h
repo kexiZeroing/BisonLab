@@ -40,40 +40,50 @@
       know about them.  */
    enum yytokentype {
      WRITE = 258,
-     AND = 259,
-     OR = 260,
-     NOT = 261,
-     IF = 262,
-     ELSE = 263,
-     THEN = 264,
-     LT = 265,
-     LE = 266,
-     EQ = 267,
-     NE = 268,
-     GT = 269,
-     GE = 270,
-     NAME = 271,
-     NUMBER = 272,
-     CHARCONST = 273
+     READ = 259,
+     AND = 260,
+     OR = 261,
+     NOT = 262,
+     IF = 263,
+     ELSE = 264,
+     THEN = 265,
+     FOR = 266,
+     TO = 267,
+     BY = 268,
+     WHILE = 269,
+     LT = 270,
+     LE = 271,
+     EQ = 272,
+     NE = 273,
+     GT = 274,
+     GE = 275,
+     NAME = 276,
+     NUMBER = 277,
+     CHARCONST = 278
    };
 #endif
 /* Tokens.  */
 #define WRITE 258
-#define AND 259
-#define OR 260
-#define NOT 261
-#define IF 262
-#define ELSE 263
-#define THEN 264
-#define LT 265
-#define LE 266
-#define EQ 267
-#define NE 268
-#define GT 269
-#define GE 270
-#define NAME 271
-#define NUMBER 272
-#define CHARCONST 273
+#define READ 259
+#define AND 260
+#define OR 261
+#define NOT 262
+#define IF 263
+#define ELSE 264
+#define THEN 265
+#define FOR 266
+#define TO 267
+#define BY 268
+#define WHILE 269
+#define LT 270
+#define LE 271
+#define EQ 272
+#define NE 273
+#define GT 274
+#define GE 275
+#define NAME 276
+#define NUMBER 277
+#define CHARCONST 278
 
 
 
