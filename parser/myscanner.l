@@ -4,6 +4,9 @@
 
 %%
 "//".*                  ;
+"procedure"             { return PROCEDURE; }
+"int"                   { return INT; }
+"char"                  { return CHAR; }
 "read"                  { return READ; }
 "write"                 { return WRITE; }
 "=="                    { return EQ; }
@@ -23,6 +26,7 @@
 "by"                    { return BY; }
 "while"                 { return WHILE; }
 ";"                     { return ';'; }
+":"                     { return ':'; }
 "+"                     { return '+'; }
 "-"                     { return '-'; }
 "*"                     { return '*'; }

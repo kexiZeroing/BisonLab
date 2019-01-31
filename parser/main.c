@@ -18,10 +18,10 @@ int main (int argc, char* argv[]) {
 
 	succFlag = yyparse();
 
-	if (errorCount == 0) {
+	if (succFlag == 0) {
 		printf("Parse Successfully.\n");  //ctrl+d if use stdin
 	} else {
-		printf("Parser fails. Total number of errors: %d.\n", errorCount);
+		printf("Parser fails. Total number of errors: %d\n", errorCount);
 	}
 	return 0;
 }

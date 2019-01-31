@@ -6,7 +6,11 @@
 /* Bison declarations */
 %error-verbose
 
-%start Stmts
+%start Procedure
+
+%token PROCEDURE
+%token INT
+%token CHAR
 %token WRITE
 %token READ
 %token AND
@@ -32,6 +36,27 @@
 
 /* productions and actions */
 %%
+Procedure   : PROCEDURE NAME '{' Decls Stmts '}'
+			;
+Decls 		: Decls Decl ';' 
+	 		| Decl ';' 
+	 		;
+Decl		: Type SpecList
+			;
+Type		: INT
+			| CHAR
+			;
+SpecList	: SpecList ',' Spec
+			| Spec 
+			;
+Spec		: NAME 
+			| NAME '[' Bounds ']' 
+			;
+Bounds		: Bounds ',' Bound 
+      		| Bound 
+      		;
+Bound		: NUMBER ':' NUMBER 
+			;
 Stmts		: Stmts Stmt 
 	 		| Stmt 
 	 		;

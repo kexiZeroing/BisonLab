@@ -39,51 +39,57 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     WRITE = 258,
-     READ = 259,
-     AND = 260,
-     OR = 261,
-     NOT = 262,
-     IF = 263,
-     ELSE = 264,
-     THEN = 265,
-     FOR = 266,
-     TO = 267,
-     BY = 268,
-     WHILE = 269,
-     LT = 270,
-     LE = 271,
-     EQ = 272,
-     NE = 273,
-     GT = 274,
-     GE = 275,
-     NAME = 276,
-     NUMBER = 277,
-     CHARCONST = 278
+     PROCEDURE = 258,
+     INT = 259,
+     CHAR = 260,
+     WRITE = 261,
+     READ = 262,
+     AND = 263,
+     OR = 264,
+     NOT = 265,
+     IF = 266,
+     ELSE = 267,
+     THEN = 268,
+     FOR = 269,
+     TO = 270,
+     BY = 271,
+     WHILE = 272,
+     LT = 273,
+     LE = 274,
+     EQ = 275,
+     NE = 276,
+     GT = 277,
+     GE = 278,
+     NAME = 279,
+     NUMBER = 280,
+     CHARCONST = 281
    };
 #endif
 /* Tokens.  */
-#define WRITE 258
-#define READ 259
-#define AND 260
-#define OR 261
-#define NOT 262
-#define IF 263
-#define ELSE 264
-#define THEN 265
-#define FOR 266
-#define TO 267
-#define BY 268
-#define WHILE 269
-#define LT 270
-#define LE 271
-#define EQ 272
-#define NE 273
-#define GT 274
-#define GE 275
-#define NAME 276
-#define NUMBER 277
-#define CHARCONST 278
+#define PROCEDURE 258
+#define INT 259
+#define CHAR 260
+#define WRITE 261
+#define READ 262
+#define AND 263
+#define OR 264
+#define NOT 265
+#define IF 266
+#define ELSE 267
+#define THEN 268
+#define FOR 269
+#define TO 270
+#define BY 271
+#define WHILE 272
+#define LT 273
+#define LE 274
+#define EQ 275
+#define NE 276
+#define GT 277
+#define GE 278
+#define NAME 279
+#define NUMBER 280
+#define CHARCONST 281
 
 
 
