@@ -974,7 +974,7 @@ YY_RULE_SETUP
 case 38:
 YY_RULE_SETUP
 #line 50 "myscanner.l"
-{   yylval.string = malloc(strlen(yytext)+1);  // strlen don't include \0
+{   yylval.string = malloc(strlen(yytext) + 1);  // need include \0
                             strcpy(yylval.string, yytext); 
                             return NAME; 
                         }

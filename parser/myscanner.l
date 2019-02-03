@@ -47,7 +47,7 @@ extern int errorCount;
 "]"                     { return ']'; }
 ","                     { return ','; }
 [0-9]+                  { return NUMBER; }
-[A-Za-z][A-Za-z0-9]*    {   yylval.string = malloc(strlen(yytext)+1);  // strlen don't include \0
+[A-Za-z][A-Za-z0-9]*    {   yylval.string = malloc(strlen(yytext) + 1);  // need include \0
                             strcpy(yylval.string, yytext); 
                             return NAME; 
                         }

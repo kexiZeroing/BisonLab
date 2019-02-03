@@ -1554,12 +1554,12 @@ yyreduce:
 
   case 14:
 #line 62 "myparser.y"
-    { VarGet((yyvsp[(1) - (1)].string)); ;}
+    { getVar((yyvsp[(1) - (1)].string)); ;}
     break;
 
   case 15:
 #line 63 "myparser.y"
-    { VarGet((yyvsp[(1) - (4)].string)); ;}
+    { getVar((yyvsp[(1) - (4)].string)); ;}
     break;
 
   case 29:

@@ -59,8 +59,8 @@ Type		: INT
 SpecList	: SpecList ',' Spec
 			| Spec 
 			;
-Spec		: NAME  { VarGet($1); }
-			| NAME '[' Bounds ']' { VarGet($1); }
+Spec		: NAME  { getVar($1); }
+			| NAME '[' Bounds ']' { getVar($1); }
 			;
 Bounds		: Bounds ',' Bound 
       		| Bound 

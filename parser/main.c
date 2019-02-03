@@ -5,11 +5,11 @@ int errorCount = 0;
 FILE *yyin;
 
 /*
- * local variables (a listing of variables used in Demo)
+ * local variables at most 100 (a listing of variables used in Demo)
  */
 #define MAXVARS 100
-static char* vars[MAXVARS];
-static int nVars = 0;
+static char* vars[MAXVARS];  // store variable address
+static int numVars = 0;
 
 // must have yyerror, yywrap
 int yyerror (const char *s) {	
@@ -19,43 +19,49 @@ int yyerror (const char *s) {
 
 int yywrap (void) {return 1;}  // means end
 
+// find if the varname is already in vars, return addr of the variable
 char* findVar(char *varname) {
-	if ( varname == NULL )
+	if (varname == NULL)
 		return NULL;
-	for (int i = 0; i < nVars; i++){
-		if ( strcmp(vars[i], varname) == 0 )
+	for (int i = 0; i < numVars; i++){
+		if (strcmp(vars[i], varname) == 0)  // already exists
 			return vars + i;
 	}
 
 	return NULL;
 }
 
+// add the new variable to vars, return addr of the variable
 char* addVar(char *varname) {
-  if ( varname == NULL )
+  if (varname == NULL)
     return NULL;
 
-  vars[nVars] = malloc(strlen(varname)+1);
+	if (numVars >= MAXVARS) {
+		fprintf (stderr, "The maximum number %d of variables reached\n", MAXVARS);
+		return NULL;
+	}
 
-  strcpy(vars[nVars], varname);
-  nVars += 1;
+	vars[numVars] = malloc(strlen(varname) + 1);  // last pos store the addr of new space
+	strcpy(vars[numVars], varname);
+	numVars++;
 
-  return vars + nVars - 1;
+	return vars + numVars - 1;  // base addr + offset
 }
 
-char* VarGet(char* varname) {
+// get a variable name from parser, add to vars if it is a new one 
+void getVar(char* varname) {
   	char* var;
 
   	var = findVar(varname);
-	if ( var == NULL )
+	if (var == NULL)
 		var = addVar(varname);
-	return var;
 }
 
 
 int main (int argc, char* argv[]) {
 	int printHelp = 0;
 	int printVar = 0;
-	// ./demo -h test.demo
+	// ./demo -h test1.demo
 	if (argc == 3) {
 		char *tmpH = "-h";
 		char *tmpS = "-s";
@@ -68,7 +74,6 @@ int main (int argc, char* argv[]) {
 			}
 		}else if(strcmp(argv[1], tmpS) == 0){
 			printVar = 1;
-			printHelp = 1;
 			yyin = fopen(argv[2], "r");
 			if (!yyin){
 				printf("error, unable to open file %s", argv[2]);
@@ -82,7 +87,7 @@ int main (int argc, char* argv[]) {
 			return 0;
 		}
 	}
-	// ./demo -h  or ./demo a.demo
+	// ./demo -h  or ./demo test1.demo
 	else if(argc == 2) {
 		char *tmpH = "-h";
 		if (strcmp(argv[1], tmpH) == 0){
@@ -117,9 +122,10 @@ int main (int argc, char* argv[]) {
 
 	if (errorCount == 0) {
 		printf("Parse succeeds!\n");  //ctrl+d if use stdin
+		// print all the variables 
 		if(printVar == 1){
 			printf("======== Variable Name in Program ========\n");
-			for (int i=0; i<nVars; i++)
+			for (int i=0; i<numVars; i++)
 				printf("%s \n", vars[i]);
 		}
 	} else {
