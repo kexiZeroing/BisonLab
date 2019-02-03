@@ -8,6 +8,11 @@ extern int errorCount;
 /* Bison declarations */
 %error-verbose
 
+%union {
+  double  value;
+  char    *string;
+}
+
 %start Procedure
 %token PROCEDURE
 %token INT
@@ -30,7 +35,7 @@ extern int errorCount;
 %token NE
 %token GT
 %token GE
-%token NAME
+%token <string> NAME
 %token NUMBER
 %token CHARCONST
 
@@ -54,8 +59,8 @@ Type		: INT
 SpecList	: SpecList ',' Spec
 			| Spec 
 			;
-Spec		: NAME 
-			| NAME '[' Bounds ']' 
+Spec		: NAME  { VarGet($1); }
+			| NAME '[' Bounds ']' { VarGet($1); }
 			;
 Bounds		: Bounds ',' Bound 
       		| Bound 

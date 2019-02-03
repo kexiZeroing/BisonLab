@@ -148,7 +148,15 @@ extern int errorCount;
 #endif
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+#line 11 "myparser.y"
+{
+  double  value;
+  char    *string;
+}
+/* Line 193 of yacc.c.  */
+#line 159 "myparser.tab.c"
+	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
@@ -160,7 +168,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 164 "myparser.tab.c"
+#line 172 "myparser.tab.c"
 
 #ifdef short
 # undef short
@@ -479,14 +487,14 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    40,    40,    41,    42,    44,    45,    46,    47,    49,
-      51,    52,    54,    55,    57,    58,    60,    61,    63,    65,
-      66,    68,    69,    70,    71,    72,    73,    74,    75,    76,
-      77,    78,    79,    80,    81,    83,    84,    85,    86,    87,
-      88,    89,    90,    92,    93,    95,    96,    98,    99,   101,
-     102,   103,   104,   105,   106,   107,   108,   110,   111,   112,
-     114,   115,   116,   118,   119,   120,   121,   123,   124,   126,
-     127
+       0,    45,    45,    46,    47,    49,    50,    51,    52,    54,
+      56,    57,    59,    60,    62,    63,    65,    66,    68,    70,
+      71,    73,    74,    75,    76,    77,    78,    79,    80,    81,
+      82,    83,    84,    85,    86,    88,    89,    90,    91,    92,
+      93,    94,    95,    97,    98,   100,   101,   103,   104,   106,
+     107,   108,   109,   110,   111,   112,   113,   115,   116,   117,
+     119,   120,   121,   123,   124,   125,   126,   128,   129,   131,
+     132
 };
 #endif
 
@@ -1525,68 +1533,78 @@ yyreduce:
   switch (yyn)
     {
         case 3:
-#line 41 "myparser.y"
+#line 46 "myparser.y"
     { yyerror("Missing procedure right curly brace '}'"); yyclearin;;}
     break;
 
   case 4:
-#line 42 "myparser.y"
+#line 47 "myparser.y"
     { yyerror("unexpected EOF"); yyclearin;;}
     break;
 
   case 7:
-#line 46 "myparser.y"
+#line 51 "myparser.y"
     { yyerror("Missing semicolon after declaration"); ;}
     break;
 
   case 8:
-#line 47 "myparser.y"
+#line 52 "myparser.y"
     { yyerror("Missing semicolon after declaration"); ;}
     break;
 
+  case 14:
+#line 62 "myparser.y"
+    { VarGet((yyvsp[(1) - (1)].string)); ;}
+    break;
+
+  case 15:
+#line 63 "myparser.y"
+    { VarGet((yyvsp[(1) - (4)].string)); ;}
+    break;
+
   case 29:
-#line 76 "myparser.y"
+#line 81 "myparser.y"
     { yyerror("Empty statement list is not allowed"); ;}
     break;
 
   case 30:
-#line 77 "myparser.y"
+#line 82 "myparser.y"
     { yyerror("Empty statement in a list is not allowed"); ;}
     break;
 
   case 31:
-#line 78 "myparser.y"
+#line 83 "myparser.y"
     { yyerror("Missing semicolon after assignment"); ;}
     break;
 
   case 32:
-#line 79 "myparser.y"
+#line 84 "myparser.y"
     { yyerror("No such reserved word"); ;}
     break;
 
   case 33:
-#line 80 "myparser.y"
+#line 85 "myparser.y"
     { yyerror("Missing keyword THEN"); ;}
     break;
 
   case 34:
-#line 81 "myparser.y"
+#line 86 "myparser.y"
     { yyerrok; yyclearin; ;}
     break;
 
   case 42:
-#line 90 "myparser.y"
+#line 95 "myparser.y"
     { yyerrok; yyclearin; ;}
     break;
 
   case 56:
-#line 108 "myparser.y"
+#line 113 "myparser.y"
     { yyerror("Forgot an equal '=' in RelExprssion"); ;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1590 "myparser.tab.c"
+#line 1608 "myparser.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1800,7 +1818,7 @@ yyreturn:
 }
 
 
-#line 130 "myparser.y"
+#line 135 "myparser.y"
                     
  /* C code */
 
