@@ -1,0 +1,9 @@
+// error program
+procedure main {
+    int a   // missing semicolon
+    {a=1; {
+        b=3   // missing semicolon
+        }
+    }   
+}
+}   // unexpected curly brace

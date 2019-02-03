@@ -1,13 +1,14 @@
 /* C declarations */
 %{
-
+#include <stdio.h>
+extern int yylineno;
+extern int errorCount;
 %}
 
 /* Bison declarations */
 %error-verbose
 
 %start Procedure
-
 %token PROCEDURE
 %token INT
 %token CHAR
@@ -37,12 +38,13 @@
 /* productions and actions */
 %%
 Procedure   : PROCEDURE NAME '{' Decls Stmts '}'
-			| PROCEDURE NAME '{' Decls Stmts { yyerror("Forget procedure right curly brace '}'"); }
+			| PROCEDURE NAME '{' Decls Stmts { yyerror("Missing procedure right curly brace '}'"); yyclearin;}
+			| PROCEDURE NAME '{' Decls Stmts '}' '}' { yyerror("unexpected EOF"); yyclearin;}
 			;
 Decls 		: Decls Decl ';' 
 	 		| Decl ';' 
-			| Decls Decl { yyerror("Forget semicolon after declaration"); }
-			| Decl  { yyerror("Forget semicolon after declaration"); }
+			| Decls Decl { yyerror("Missing semicolon after declaration"); }
+			| Decl  { yyerror("Missing semicolon after declaration"); }
 	 		;
 Decl		: Type SpecList
 			;
@@ -73,7 +75,7 @@ Stmt      	: Reference '=' Expr ';'
 			| WRITE Expr ';'
 			| '{' '}' { yyerror("Empty statement list is not allowed"); }
 			| '{' ';' '}' { yyerror("Empty statement in a list is not allowed"); }
-			| Reference '=' Expr { yyerror("Forget semicolon after assignment"); }
+			| Reference '=' Expr { yyerror("Missing semicolon after assignment"); }
 			| NAME NAME ';' { yyerror("No such reserved word"); }
 			| IF '(' Bool ')' Stmt  { yyerror("Missing keyword THEN"); }
 			| error ';' { yyerrok; yyclearin; }
