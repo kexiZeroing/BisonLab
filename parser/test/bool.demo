@@ -1,0 +1,15 @@
+procedure testBoolean {
+    int a, b[1:10], c;
+    char ch[1:10];
+  
+    if(a or b[1]>b[2] or c and ch[2] == (ch[3]+1)) then {
+        write 1;
+    }
+
+    if(not a < b[2] and b[2] < 10) then read ch[1];
+
+    while (a and b[10] or c == b and ch[10]) {
+        write 2;
+    }
+    
+}

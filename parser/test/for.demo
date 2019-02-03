@@ -1,0 +1,12 @@
+procedure testFor {
+    int i;
+    int len, res;
+
+    len = 10;
+    res = 0;
+
+    for i = 1 to 2*len by 2-1 {
+        res = res + i;
+        write i * 2;
+    }
+}
