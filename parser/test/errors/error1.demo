@@ -1,0 +1,13 @@
+// error program
+procedure main {
+    int a,b;
+
+    a = 1;
+    b = 1    // miss semicolon
+
+    write b;;   // empty statement
+    {}       // empty statement list
+    {
+        a = b;   // missing curly brace
+  
+}

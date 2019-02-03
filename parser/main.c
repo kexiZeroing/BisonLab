@@ -1,6 +1,5 @@
 #include <stdio.h>
 int yylineno;
-int succFlag;
 int errorCount = 0;
 
 FILE *yyin;
@@ -60,10 +59,10 @@ int main (int argc, char* argv[]) {
 		return 0;
     }
 
-	succFlag = yyparse();
+	yyparse();
 
-	if (succFlag == 0) {
-		printf("Parse Successfully.\n");  //ctrl+d if use stdin
+	if (errorCount == 0) {
+		printf("Parse succeeds!\n");  //ctrl+d if use stdin
 	} else {
 		printf("Parser fails. Total number of errors: %d\n", errorCount);
 	}

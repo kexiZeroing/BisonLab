@@ -1,4 +1,10 @@
 %{
+#include <stdio.h>
+
+extern int yylineno;
+extern int errorCount;
+#define YYINCR(n) yylineno += n
+
 #include "myparser.tab.h"
 %}
 
@@ -43,8 +49,7 @@
 [A-Za-z][A-Za-z0-9]*    { return NAME; }
 '(.|\\.)'               { return CHARCONST; }
 [ \t]                   ;
-[\n]                    { yylineno++; }
-
+[\n]                    { YYINCR(1); }
+.                       { fprintf (stderr, "Unknown character %s at line %d\n", yytext, yylineno); }
 
 %%
-

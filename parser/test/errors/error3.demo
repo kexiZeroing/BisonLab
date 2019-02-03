@@ -1,0 +1,18 @@
+// error program
+procedure main {
+    int a;
+
+    a = 1;
+
+    if(a) {       // missing keyword THEN
+        write 1;
+    }
+
+    if (a<10) then {
+        a = a + 1;
+    
+    {
+        write 1;   
+    }
+    
+}    // forget curly brace
