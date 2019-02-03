@@ -40,7 +40,7 @@
 "]"                     { return ']'; }
 ","                     { return ','; }
 [0-9]+                  { return NUMBER; }
-[A-Za-z][A-Za-z0-9_]*   { return NAME; }
+[A-Za-z][A-Za-z0-9]*    { return NAME; }
 '(.|\\.)'               { return CHARCONST; }
 [ \t]                   ;
 [\n]                    { yylineno++; }

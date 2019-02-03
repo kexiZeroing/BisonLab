@@ -60,8 +60,8 @@ Bound		: NUMBER ':' NUMBER
 Stmts		: Stmts Stmt 
 	 		| Stmt 
 	 		;
-Stmt      	: '{' Stmts '}'  
-			| Reference '=' Expr ';' 
+Stmt      	: Reference '=' Expr ';' 
+			| '{' Stmts '}'
 			| IF '(' Bool ')' THEN Stmt 
           	| IF '(' Bool ')' THEN WithElse ELSE Stmt 
 			| WHILE '(' Bool ')' '{' Stmts '}' 
@@ -70,7 +70,12 @@ Stmt      	: '{' Stmts '}'
 			| WRITE Expr ';'
 			;
 WithElse	: IF '(' Bool ')' THEN WithElse ELSE WithElse
+			| Reference '=' Expr ';' 
 			| '{' Stmts '}'
+			| WHILE '(' Bool ')' '{' Stmts '}' 
+			| FOR NAME '=' Expr TO Expr BY Expr '{' Stmts '}' 
+			| READ Reference ';'
+			| WRITE Expr ';'
 			; 
 Bool      	: NOT OrTerm
           	| OrTerm
