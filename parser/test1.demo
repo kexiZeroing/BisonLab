@@ -1,0 +1,36 @@
+// Binary search in Demo
+
+procedure bsearch { 
+    int DATA[1:100];
+    int start, end, mid;
+    int key;
+    int res;
+
+    start = 1;
+    res = 0;   // not found
+
+    read key;
+    read end;  // # of total elements 
+
+    if (end > 100) then {
+        end = 0; 
+        write res;  
+    }
+    for i = 1 to end by 1 { 
+        read DATA[i];
+    }
+
+	while (start <= end) {
+		mid = start + (end - start) / 2; 
+		if (DATA[mid] < key) then {
+            start = mid + 1;
+        }else if (arr[mid] > key) then
+			end = mid - 1;
+		else {           
+			res = mid;  
+            start = end + 1;
+        }
+	}
+
+    write res;
+}

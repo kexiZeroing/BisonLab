@@ -1,0 +1,27 @@
+// calculate the sum of odd and even number respectively and the total sum
+
+procedure calcSum {
+    int sum, oddSum, evenSum, i;
+    int arr[1:100];
+
+    oddSum = 0;
+    evenSum = 0;
+
+    for i = 1 to 100 by 1 { 
+        read arr[i];
+    }
+
+    for i = 1 to 100 by 1 {
+        if(arr[i] / 2 == 0) then {
+            oddSum = oddSum + arr[i];
+        } else {
+            evenSum = evenSum + arr[i];
+        }
+    }
+
+    sum = evenSum + oddSum;
+
+    write oddSum;
+    write evenSum;
+    write sum;
+}
