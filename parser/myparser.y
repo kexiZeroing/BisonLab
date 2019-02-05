@@ -43,8 +43,8 @@ extern int errorCount;
 /* productions and actions */
 %%
 Procedure   : PROCEDURE NAME '{' Decls Stmts '}'
-			| PROCEDURE NAME '{' Decls Stmts { yyerror("Missing procedure right curly brace '}'"); yyclearin;}
-			| PROCEDURE NAME '{' Decls Stmts '}' '}' { yyerror("unexpected EOF"); yyclearin;}
+			| PROCEDURE NAME '{' Decls Stmts { yyerror("Missing procedure closing curly brace '}'"); }
+			| PROCEDURE NAME '{' Decls Stmts '}' '}' { yyerror("redundant closing curly brace found"); yyclearin; }
 			;
 Decls 		: Decls Decl ';' 
 	 		| Decl ';' 
@@ -78,12 +78,17 @@ Stmt      	: Reference '=' Expr ';'
 			| FOR NAME '=' Expr TO Expr BY Expr '{' Stmts '}' 
 			| READ Reference ';'
 			| WRITE Expr ';'
-			| '{' '}' { yyerror("Empty statement list is not allowed"); }
-			| '{' ';' '}' { yyerror("Empty statement in a list is not allowed"); }
-			| Reference '=' Expr { yyerror("Missing semicolon after assignment"); }
-			| NAME NAME ';' { yyerror("No such reserved word"); }
-			| IF '(' Bool ')' Stmt  { yyerror("Missing keyword THEN"); }
-			| error ';' { yyerrok; yyclearin; }
+			| '{' '}' { yyerror("Empty statement list is not allowed"); yyclearin; }
+			| '{' ';' '}' { yyerror("Empty statement in a list is not allowed"); yyclearin; }
+			| Reference '+' '=' Expr ';' { yyerror("Do not support '+=', only use '=' in assignment"); yyclearin; } 
+			| Reference '=' Expr ';' ';' { yyerror("Empty statement is not allowed"); yyclearin; 
+			}
+			| WRITE '=' Expr ';' { yyerror("Could not make an assignment to write"); yyclearin; }
+			| NAME NAME ';' { yyerror("No such reserved word"); yyclearin; }
+			| IF '(' Bool ')' error  { yyerror("Missing keyword THEN"); /* just forget keyword then, do not need to throw away token */ }
+			| IF '(' Bool ')' THEN '{' Stmts error { yyerror("Missing closing curly brace '}'"); }
+			| Reference '=' Expr error { yyerror("Missing semicolon ';' after assignment"); }
+			| error ';'  { yyerror("Do not support this statement"); yyclearin; yyerrok; }
 			;
 WithElse	: IF '(' Bool ')' THEN WithElse ELSE WithElse
 			| Reference '=' Expr ';' 
@@ -92,7 +97,17 @@ WithElse	: IF '(' Bool ')' THEN WithElse ELSE WithElse
 			| FOR NAME '=' Expr TO Expr BY Expr '{' Stmts '}' 
 			| READ Reference ';'
 			| WRITE Expr ';'
-			| error ';' { yyerrok; yyclearin; }
+			| '{' '}' { yyerror("Empty statement list is not allowed"); yyclearin; }
+			| '{' ';' '}' { yyerror("Empty statement in a list is not allowed"); yyclearin; }
+			| Reference '+' '=' Expr ';' { yyerror("Do not support '+=', only use '=' in assignment"); yyclearin; } 
+			| Reference '=' Expr ';' ';' { yyerror("Empty statement is not allowed"); yyclearin; 
+			}
+			| WRITE '=' Expr ';' { yyerror("can not make an assignment to write"); yyclearin; }
+			| NAME NAME ';' { yyerror("No such reserved word"); yyclearin; }
+			| IF '(' Bool ')' error  { yyerror("Missing keyword THEN"); /* just forget keyword then, do not need to throw away token */ }
+			| IF '(' Bool ')' THEN '{' Stmts error { yyerror("Missing closing curly brace '}'"); }
+			| Reference '=' Expr error { yyerror("Missing semicolon ';' after assignment"); }
+			| error ';'  { yyerror("Do not support this statement"); yyclearin; yyerrok; }
 			; 
 Bool      	: NOT OrTerm
           	| OrTerm

@@ -1,11 +1,13 @@
-// error program
 procedure main {
-    int a[1:10]  // missing semicolone
-    char c;
-
-    for i = 1 to 10 by 1 {
-        a[i] = 1;
-    }
-    
-    if(a = 1) then write a;    // equal should be '=='
+  int a;
+  int b[10:20,30:40];
+  char c;
+  a = 1;
+  for b = 1 to 10 by 1 {
+      a = 1 ; ;
+      }
+  while ( a == a ) {
+      b = 1 ; // b should require a subscript
+      }
 }
+
