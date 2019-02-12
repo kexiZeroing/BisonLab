@@ -23,7 +23,8 @@ int yywrap (void) {return 1;}  // means end
 char* findVar(char *varname) {
 	if (varname == NULL)
 		return NULL;
-	for (int i = 0; i < numVars; i++){
+	int i;
+	for (i = 0; i < numVars; i++){
 		if (strcmp(vars[i], varname) == 0)  // already exists
 			return vars + i;
 	}
@@ -69,14 +70,14 @@ int main (int argc, char* argv[]) {
 			printHelp = 1;
 			yyin = fopen(argv[2], "r");
 			if (!yyin){
-				printf("error, unable to open file %s", argv[2]);
+				printf("error, unable to open file %s\n", argv[2]);
 				return 0;
 			}
 		}else if(strcmp(argv[1], tmpS) == 0){
 			printVar = 1;
 			yyin = fopen(argv[2], "r");
 			if (!yyin){
-				printf("error, unable to open file %s", argv[2]);
+				printf("error, unable to open file %s\n", argv[2]);
 				return 0;
 			}
 		}else if(argv[1][0] == '-'){
@@ -98,7 +99,7 @@ int main (int argc, char* argv[]) {
 		}else {
 			yyin = fopen(argv[1], "r");
 			if(!yyin) {
-				printf("error, unable to open file %s", argv[1]);
+				printf("error, unable to open file %s\n", argv[1]);
 				return 0;
 			}
 		}
@@ -125,7 +126,8 @@ int main (int argc, char* argv[]) {
 		// print all the variables 
 		if(printVar == 1){
 			printf("======== Variable Name in Program ========\n");
-			for (int i=0; i<numVars; i++)
+			int i;
+			for (i=0; i<numVars; i++)
 				printf("%s \n", vars[i]);
 		}
 	} else {
