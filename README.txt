@@ -1,17 +1,18 @@
 Scanner and Parser for Demo
-Kexi Dang (kd38)
+Author: Kexi Dang (kd38)
 
 # About source code
-myscanner.l: Specification input file for Flex
-myparser.y: Specification input file for Bison
-main.c: Driver that parses command line arguments and invokes the parser
-Makefile: List of rules how to (re)compile the source code
-test/: Including unit test for Demo language and 4 error test programs in errors directory
-test1.demo and test2.demo: two valid test programs written in Demo
+- myscanner.l: Specification input file for Flex
+- myparser.y: Specification input file for Bison
+- main.c: Driver that parses command line arguments and invokes the parser
+- Makefile: List of rules how to (re)compile the source code
+- test/: Including unit test, feature test in ut directory and 4 error test programs in errors directory (Professor give them on clear '/clear/courses/comp506/students/demo/lab1')
+- test1.demo and test2.demo: two valid test programs written in Demo language
 
 
 # How to build: make command
 Use Make (rules in Makefile) to build the scanner and parser.
+
 
 # How to execute
     ./demo -h

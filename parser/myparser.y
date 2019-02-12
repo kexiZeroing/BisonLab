@@ -44,12 +44,14 @@ extern int errorCount;
 %%
 Procedure   : PROCEDURE NAME '{' Decls Stmts '}'
 			| PROCEDURE NAME '{' Decls Stmts { yyerror("Missing procedure closing curly brace '}'"); }
-			| PROCEDURE NAME '{' Decls Stmts '}' '}' { yyerror("redundant closing curly brace found"); yyclearin; }
+			| PROCEDURE NAME '{' Decls Stmts '}' '}' { yyerror("unexpected '}', redundant closing curly brace found"); yyclearin; }
 			;
 Decls 		: Decls Decl ';' 
 	 		| Decl ';' 
 			| Decls Decl { yyerror("Missing semicolon after declaration"); }
 			| Decl  { yyerror("Missing semicolon after declaration"); }
+			| Decls Decl ';' ';' { yyerror("Unexpected semicolon. Empty statement is not allowed"); yyclearin; }
+			| Decl ';' ';' { yyerror("Unexpected semicolon. Empty statement is not allowed"); yyclearin; }
 	 		;
 Decl		: Type SpecList
 			;
@@ -81,10 +83,10 @@ Stmt      	: Reference '=' Expr ';'
 			| '{' '}' { yyerror("Empty statement list is not allowed"); yyclearin; }
 			| '{' ';' '}' { yyerror("Empty statement in a list is not allowed"); yyclearin; }
 			| Reference '+' '=' Expr ';' { yyerror("Do not support '+=', only use '=' in assignment"); yyclearin; } 
-			| Reference '=' Expr ';' ';' { yyerror("Empty statement is not allowed"); yyclearin; 
+			| Reference '=' Expr ';' ';' { yyerror("Unexpected semicolon. Empty statement is not allowed"); yyclearin; 
 			}
-			| WRITE '=' Expr ';' { yyerror("Could not make an assignment to write"); yyclearin; }
-			| NAME NAME ';' { yyerror("No such reserved word"); yyclearin; }
+			| WRITE '=' Expr ';' { yyerror("unexpected EQUALS, expecting CHARCONST or '(' or NAME or NUMBER, could not make an assignment to write"); yyclearin; }
+			| NAME NAME ';' { yyerror("unexpected NAME. No such reserved word"); yyclearin; }
 			| IF '(' Bool ')' error  { yyerror("Missing keyword THEN"); /* just forget keyword then, do not need to throw away token */ }
 			| IF '(' Bool ')' THEN '{' Stmts error { yyerror("Missing closing curly brace '}'"); }
 			| Reference '=' Expr error { yyerror("Missing semicolon ';' after assignment"); }
@@ -100,7 +102,7 @@ WithElse	: IF '(' Bool ')' THEN WithElse ELSE WithElse
 			| '{' '}' { yyerror("Empty statement list is not allowed"); yyclearin; }
 			| '{' ';' '}' { yyerror("Empty statement in a list is not allowed"); yyclearin; }
 			| Reference '+' '=' Expr ';' { yyerror("Do not support '+=', only use '=' in assignment"); yyclearin; } 
-			| Reference '=' Expr ';' ';' { yyerror("Empty statement is not allowed"); yyclearin; 
+			| Reference '=' Expr ';' ';' { yyerror("Unexpected semicolon. Empty statement is not allowed"); yyclearin; 
 			}
 			| WRITE '=' Expr ';' { yyerror("can not make an assignment to write"); yyclearin; }
 			| NAME NAME ';' { yyerror("No such reserved word"); yyclearin; }
